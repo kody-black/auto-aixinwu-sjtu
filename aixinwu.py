@@ -127,7 +127,7 @@ if __name__ == "__main__":
     response = session.get(AIXINWU_URL)
     print(session.cookies)
     login_days_info = extract_login_days(response)
-
+    
     # 登录结果保存在文件ans.log中
-    with open(LAST_RESPONSE_HTML, "w") as f:
+    with open(LAST_RESPONSE_HTML, "w", encoding='utf-8') as f:
         f.write(response.text)
