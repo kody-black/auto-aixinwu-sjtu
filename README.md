@@ -4,7 +4,7 @@
 
 然后半年过去了，室友用白嫖了半年的爱心币过上了幸福的新生活，而我一无所获，只留下无尽的悔恨
 
-但是作为小丑🃏，发现已经找不到室友当年的脚本了,GitHub上面的也比较旧用不了，只好自己花了一个晚上重写了一个
+但是作为小丑🃏，发现已经找不到室友当年的脚本了（~~为什么不找室友再要一次呢？感觉很丢人是不是~~,GitHub上面的也比较旧用不了，只好自己花了一个晚上重写了一个 🐕
 
 部分参考了[AutoLogin/sjtu-aixinwu/aixinwu pyrtsun/AutoLogin](https://github.com/rtsun/AutoLogin/blob/master/sjtu-aixinwu/aixinwu.py)
 
