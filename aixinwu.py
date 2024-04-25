@@ -106,7 +106,7 @@ def login_jaccount(session):
 if __name__ == "__main__":
     logging.basicConfig(filename=LOGGING_FILE, level='DEBUG')
     date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-    logging.info("=============== Log Started at " + date + "===============")
+    logging.info(" Log Started at " + date + " ")
     
     # 创建会话
     session = requests.Session()
@@ -119,15 +119,15 @@ if __name__ == "__main__":
     if load_cookies(session, COOKIE_FILE) == False:
         session = login_jaccount(session)
         print(session.cookies)
-        logging.info("=============== Login successfully at %s ===============" % date)
+        logging.info(" Login successfully at %s  " % date)
     else:
         print(session.cookies)
-        logging.info("=============== Login by cookies successfully at %s ===============" % date)
+        logging.info(" Login by cookies successfully at %s  " % date)
 
     response = session.get(AIXINWU_URL)
     print(session.cookies)
     login_days_info = extract_login_days(response)
-    
+
     # 登录结果保存在文件ans.log中
     with open(LAST_RESPONSE_HTML, "w", encoding='utf-8') as f:
         f.write(response.text)
