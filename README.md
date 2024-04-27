@@ -16,7 +16,6 @@
 git clone https://github.com/distiny-cool/auto-aixinwu-sjtu.git
 cd auto-aixinwu-sjtu
 pip install -r requirements.txt
-cp config.py.bak config.py
-# 修改用户名密码
+# 首次执行需要输入一次用户名和密码，之后会直接用保存的cookie进行登录
 python aixinwu.py
 ```

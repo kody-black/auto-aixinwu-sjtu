@@ -6,7 +6,6 @@ import re
 import time
 from bs4 import BeautifulSoup
 import requests
-from config import account
 
 AIXINWU_URL = "https://aixinwu.sjtu.edu.cn/index.php/login"
 ULOGIN_URL = "https://jaccount.sjtu.edu.cn/jaccount/ulogin"
@@ -55,7 +54,7 @@ def captcha_rec(captcha):
     }
     req = requests.post('https://t.yctin.com/en/security/captcha-recognition/', files=files)
     text = req.text.strip()
-    print("识别结果：", text)
+    print("验证码识别结果：", text)
     return text
 
 def login_jaccount(session):
@@ -91,15 +90,21 @@ def login_jaccount(session):
 
     with open("captcha.jpg", "wb") as f:
         f.write(captcha_image)
-
     captcha_code = captcha_rec("captcha.jpg")
 
-    login_context["user"] = account["username"]
-    login_context["pass"] = account["password"]
+    print("初次使用，需要输入一次用户名和密码")
+    login_context["user"] = input("请输入用户名: ")
+    login_context["pass"] = input("请输入密码: ")
     login_context["captcha"] = captcha_code
     session.post(ULOGIN_URL, data=login_context)
-    
-    save_cookies(session, COOKIE_FILE)
+
+    # 检查是否存在名为JAAuthCookie的Cookie
+    if 'JAAuthCookie' in session.cookies:
+        print("登录成功")
+        save_cookies(session, COOKIE_FILE)
+    else:
+        print("登录失败, 账号或密码错误")
+        exit(1)
     return session
 
 
@@ -125,7 +130,6 @@ if __name__ == "__main__":
         logging.info(" Login by cookies successfully at %s  " % date)
 
     response = session.get(AIXINWU_URL)
-    print(session.cookies)
     login_days_info = extract_login_days(response)
 
     # 登录结果保存在文件ans.log中
