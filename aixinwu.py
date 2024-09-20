@@ -24,8 +24,11 @@ def captcha_rec(captcha):
         print(e)
         return None
 
-do = ChromiumOptions().set_paths(local_port=10000, user_data_path=r'.\data0', browser_path=r"C:\Program Files\Google\Chrome\Application\chrome.exe")
-# do.headless()
+do = ChromiumOptions().set_paths(local_port=10000, user_data_path=r'.\data0', browser_path=BROWSER_PATH)
+
+# 用Edge浏览器时，需要先注释掉下面这行运行以界面模式运行一次，点一次脑抽的那个“我接受“，之后再取消注释，用headless模式运行
+# 其他使用有问题也可以注释掉这行自己研究研究
+do.headless()
 page = WebPage(chromium_options=do)
 page.get(AIXINWU_URL)
 
@@ -44,8 +47,6 @@ while '403' in page.title and attempts < 5:
     page.wait(1)
     captcha_img = page.ele('@id=captcha-img')
     img = captcha_img.get_screenshot(as_bytes=True, scroll_to_center=True)
-    # # img从str变为bytes
-    # img = img.encode()
     with open('captcha.jpg', 'wb') as f:
         f.write(img)
 
@@ -60,6 +61,7 @@ while '403' in page.title and attempts < 5:
 if attempts >= 5:
     print("尝试失败次数过多，请稍后再试")
     page.save(name=LAST_RESPONSE_HTML)
+    page.close()
     exit(1)
 
 page.save(name=LAST_RESPONSE_HTML)
@@ -70,3 +72,5 @@ try:
 except Exception as e:
     print(e)
     print("登录天数未找到，请查看last_res.mhtml文件检查登录结果")
+
+page.close()
