@@ -1,5 +1,7 @@
 data0
-user.cookies
 last_res.html
 captcha.jpg
 test.ipynb
+config.py
+last_res.mhtml
+*.pyc

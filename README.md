@@ -1,3 +1,11 @@
+## 新版签到脚本的故事
+
+本来不打算更新了，但是SadPull同学发issue：已经白嫖很久了，突然失效了感觉不习惯呜呜呜
+
+我心真善，更新好了
+
+所以白嫖的同学点个虽然没啥用的star吧，不要默默白嫖了~
+
 ## SJTU爱心屋自动签到脚本
 
 有这么一个故事，室友大概半年前写了一个爱心屋签到脚本，我拿来白嫖，但是当时觉得自己币多，而且没听太明白怎么配置，就没有用。
@@ -16,6 +24,7 @@
 git clone https://github.com/distiny-cool/auto-aixinwu-sjtu.git
 cd auto-aixinwu-sjtu
 pip install -r requirements.txt
-# 首次执行需要输入一次用户名和密码，之后会直接用保存的cookie进行登录
+cp config_template.py config.py
+# 修改config.py为你的用户名和密码
 python aixinwu.py
 ```
